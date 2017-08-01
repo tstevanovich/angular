@@ -27,6 +27,8 @@ Atom comes with a whole bunch of packages to make editing code easier, and it al
   <li>linter-ui-default</li>
   <li>markdown-preview-plus</li>
   <li>color-picker</li>
+  <li>emmet</li>
+  <li>atom-bootstrap3</li>
 </ul>
 
 ## Install Node
