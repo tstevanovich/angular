@@ -24,6 +24,7 @@ Atom comes with a whole bunch of packages to make editing code easier, and it al
   <li>intentions</li>
   <li>linter</li>
   <li>linter-jshint</li>
+  <li>linter-tshint</li>
   <li>linter-ui-default</li>
   <li>markdown-preview-plus</li>
   <li>color-picker</li>
