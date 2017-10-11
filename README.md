@@ -3,10 +3,26 @@
 ## Terminal
 For Mac users, you should already have terminal installed. Windows users, I'd recommend [Cmder](http://cmder.net). This is preferable than using Windows command prompt.
 
-## Editor
-[Atom](https://atom.io) is the IDE we'll use.
+## Editors
+[Visual Studio Code](https://code.visualstudio.com/Download) 
 
-## Atom packages
+[Atom](https://atom.io)
+
+## Visual Studio Code Extensions (if you downloaded VSC)
+VSC comes with many extensions to make editing code easier. Below is a list of extensions I'd recommend on adding to it. Click on the extensions tab in your editor to begin searching and installing.
+
+<strong>Install</strong>
+<ul>
+  <li>Angular 4 and TypeScript/HTML VS Code Snippets</li>
+  <li>Angular Material 2, Flex layout 1, Covalent 1 &amp; Material icon snippets</li>
+  <li>Angular v4 TypeScript Snippets</li>
+  <li>Auto Import</li>
+  <li>Markdown All in One</li>
+  <li>TSLint</li>
+</ul>
+
+
+## Atom packages (if you downloaded Atom)
 Atom comes with a whole bunch of packages to make editing code easier, and it also comes with a few annoying ones. Below is a list of packages I'd recommend on adding to it, and a couple to disable. Go to Atom settings `CTRL + ,`
 
 <strong>Disable</strong>
