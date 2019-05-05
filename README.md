@@ -67,9 +67,9 @@ trim_trailing_whitespace = false
 
 ## Install Node
 
-Let's check to see if you have Node installed. Go to the command line type `node -v`
+Let's check to see if you have Node installed. Open up command prompt and type `node -v`
 
-You should see something like `v6.11.1`
+You should see something like `v12.1.0`
 
 If you don't have node then let's [install it](https://nodejs.org/en/download)
 
