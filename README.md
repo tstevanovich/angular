@@ -83,8 +83,9 @@ npm install -g @angular\cli
 ```
 
 ## Create a new project
+This will install a new Angular project with SCSS for styling instead of the default CSS. It will also add Angular routing to the project.
 ```bash
-ng new nameofproject
+ng new nameofproject --style=scss --routing
 ```
 
 ## Add prettier setting files
