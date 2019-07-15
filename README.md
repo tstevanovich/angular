@@ -49,44 +49,11 @@ You can find this file in VS Code, by going to `File>Preferences>Settings`. In t
 {
   "git.autofetch": true,
   // Editor Settings
-  "editor.autoIndent": true,
   "editor.codeActionsOnSave": {
     "source.organizeImports": true,
     "source.fixAll.tslint": true
   },
-  "editor.codeLens": false,
-  "editor.cursorBlinking": "solid",
-  "editor.cursorSmoothCaretAnimation": true,
-  "editor.cursorStyle": "line",
-  "editor.fontSize": 16,
-  "editor.fontFamily": "Dank Mono, Operator Mono, Fira Code, Inconsolata, Menlo",
-  "editor.fontLigatures": true,
-  "editor.formatOnPaste": true,
-  "editor.formatOnType": false,
-  "editor.formatOnSave": true,
-  "editor.letterSpacing": 0.5,
-  "editor.lineHeight": 25,
-  "editor.minimap.enabled": false,
-  "editor.renderWhitespace": "none",
-  "editor.tabCompletion": "on",
   "editor.tabSize": 2,
-  "editor.wordWrap": "off",
-  // File Settings
-  "files.autoSave": "afterDelay",
-  "files.autoSaveDelay": 1000,
-  "files.exclude": {
-    "**/.git": true,
-    "**/.DS_Store": true,
-    "**/*.js": {
-      "when": "$(basename).ts"
-    },
-    "**/*.js.map": {
-      "when": "$(basename)"
-    }
-  },
-  "files.hotExit": "onExit",
-  "files.defaultLanguage": "typescript",
-  "files.trimTrailingWhitespace": true,
   // Prettier Settings
   "prettier.arrowParens": "always",
   "prettier.singleQuote": true,
@@ -163,6 +130,7 @@ You can find this file in VS Code, by going to `File>Preferences>Settings`. In t
   "workbench.iconTheme": "material-icon-theme",
   "workbench.colorTheme": "Winter is Coming (Dark Blue - No Italics)"
 }
+
 ```
 
 ## Install Node
