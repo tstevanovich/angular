@@ -227,8 +227,166 @@ to
 "extends": ["tslint:recommended", "tslint-angular", "tslint-config-prettier"],
 ```
 
-## View your project through a browser
+## Configure project
+Architecture of the project is important. Please see the [Architecture diagram](Angular_architecture.png) for how to set up your folder structure
+* Create the folder structure per the above diagram
+* Move the styles.scss file into this new directory and then update angular.json references from src/styles.scss to src/scss/styles.scss
+* Edit tsconfig.json to support smart paths, between target and typeRoots, add:
+```json
+"paths": {
+  "@app/*": ["src/app/*"],
+  "@assets/*": ["src/assets/*"],
+  "@environments/*": ["src/environments/*"]
+},
+```
+* Create the folder modules for your project
+```bash
+ng g m shared
+ng g m core
+```
+* Directly under the imports of these new modules add: 
+  * Edit app.module.ts to support this new structure
+  * Any feature page you create should have a features module with this structure. Always include the shared module in the MODULES section. Use `ng g m features/nameoffeature` to create feature
+```javascript
+const COMPONENTS = [];
+const PROVIDERS = [];
+const MODULES = [];
 
+@NgModule({
+  imports: [MODULES],
+  declarations: [COMPONENTS],
+  providers: [PROVIDERS],
+  // Only shared.module.ts needs the exports section
+  exports: [MODULES, COMPONENTS]
+})
+```
+* Delete the previous @NgModule
+
+## Add Angular Material to your project
+```bash
+npm install --save @angular/material @angular/cdk @angular/animations hammerjs
+```
+Edit main.ts and add hammerjs import
+```javascript
+import 'hammerjs';
+```
+Modify shared.module.ts
+```javascript
+import {
+  MatAutocompleteModule,
+  MatBadgeModule,
+  MatBottomSheetModule,
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatDividerModule,
+  MatExpansionModule,
+  MatFormFieldModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatPaginatorModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatSortModule,
+  MatStepperModule,
+  MatTableModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatTooltipModule,
+  MatTreeModule
+} from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+const MODULES = [
+  CommonModule,
+  BrowserAnimationsModule,
+  // Material Form Controls
+  MatAutocompleteModule,
+  MatCheckboxModule,
+  MatDatepickerModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatRadioModule,
+  MatSelectModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  // Material Navigation
+  MatMenuModule,
+  MatSidenavModule,
+  MatToolbarModule,
+  // Material Layout
+  MatCardModule,
+  MatDividerModule,
+  MatExpansionModule,
+  MatGridListModule,
+  MatListModule,
+  MatStepperModule,
+  MatTabsModule,
+  MatTreeModule,
+  // Material Buttons & Indicators
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatBadgeModule,
+  MatChipsModule,
+  MatIconModule,
+  MatProgressSpinnerModule,
+  MatProgressBarModule,
+  MatRippleModule,
+  // Material Popups & Modals
+  MatBottomSheetModule,
+  MatDialogModule,
+  MatSnackBarModule,
+  MatTooltipModule,
+  // Material Data Table
+  MatPaginatorModule,
+  MatSortModule,
+  MatTableModule
+];
+```
+Add theme.scss under /scss directory. This will use the light indigo pink theme.
+```scss
+@import '~@angular/material/theming';
+@include mat-core();
+// Create Theme
+$app-primary: mat-palette($mat-indigo);
+$app-accent:  mat-palette($mat-pink, A200, A100, A400);
+$app-warn: mat-palette($mat-red);
+$app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
+@include angular-material-theme($app-theme);
+```
+Edit styles.scss under /scss directory
+```scss
+@import './theme.scss';
+body {
+  margin: 0;
+  padding: 0;
+}
+router-outlet ~ * {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+```
+Add Material Icons, by editing index.html
+```html
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+```
+
+## View your project through a browser
 ```bash
 npm start
 ```
@@ -236,7 +394,6 @@ npm start
 The app will be viewable at [http://localhost:4200](http://localhost:4200)
 
 ## Updating your NPM packages and Angular to latest versions
-
 ```bash
 npm install -g npm-check-updates
 ncu -u --packageFile package.json
