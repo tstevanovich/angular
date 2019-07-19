@@ -50,12 +50,10 @@ You can find this file in VS Code, by going to `File>Preferences>Settings`. In t
   "git.autofetch": true,
   // Editor Settings
   "editor.codeActionsOnSave": {
-    "source.organizeImports": true,
-    "source.fixAll.tslint": true
+    "source.organizeImports": true
   },
   "editor.tabSize": 2,
   // Prettier Settings
-  "prettier.arrowParens": "always",
   "prettier.singleQuote": true,
   "prettier.printWidth": 100,
   // Peacock Settings
@@ -126,11 +124,9 @@ You can find this file in VS Code, by going to `File>Preferences>Settings`. In t
   "typescript.updateImportsOnFileMove.enabled": "always",
   "breadcrumbs.enabled": true,
   "svn.enableProposedApi": "product",
-  "typescript.tsdk": "node_modules/typescript/lib",
   "workbench.iconTheme": "material-icon-theme",
   "workbench.colorTheme": "Winter is Coming (Dark Blue - No Italics)"
 }
-
 ```
 
 ## Install Node
@@ -193,38 +189,20 @@ package-lock.json
 dist/
 ```
 
-## Add extra dev dependencies to package.json
+## Add Font Awesome and Bootstrap
 
 ```bash
-npm install --save-dev prettier
-npm install --save-dev pretty-quick
-npm install --save-dev tslint-angular
-npm install --save-dev tslint-config-prettier
-npm install --save-dev husky
+npm install --save font-awesome
+npm install --save bootstrap
 ```
 
-## Edit package.json to include husky
-
+Edit angular.json to include Font Awesome and Bootstrap
 ```json
-"husky": {
-  "hooks": {
-      "pre-commit": "pretty-quick — staged && ng lint"
-  }
-},
-```
-
-## Edit tslint.json
-
-Change first line of tslint.json from
-
-```json
-"extends": "tslint:recommended",
-```
-
-to
-
-```json
-"extends": ["tslint:recommended", "tslint-angular", "tslint-config-prettier"],
+"styles": [
+  "node_modules/font-awesome/css/font-awesome.min.css",
+  "node_modules/bootstrap/dist/css/bootstrap.min.css",
+  ...
+],
 ```
 
 ## Configure project
@@ -380,10 +358,6 @@ router-outlet ~ * {
   height: 100%;
   width: 100%;
 }
-```
-Add Material Icons, by editing index.html
-```html
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 ```
 
 ## View your project through a browser
