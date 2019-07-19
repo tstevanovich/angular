@@ -112,7 +112,7 @@ You can find this file in VS Code, by going to `File>Preferences>Settings`. In t
   },
   "[html]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.html-language-features"
   },
   "[scss]": {
     "editor.formatOnSave": true,
