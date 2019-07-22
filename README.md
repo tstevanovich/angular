@@ -375,6 +375,7 @@ router-outlet ~ * {
   position: absolute;
   height: 100%;
   width: 100%;
+  padding: 10px;
 }
 ```
 Edit angular.json and add theme.scss to styles
