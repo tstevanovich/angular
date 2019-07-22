@@ -238,7 +238,27 @@ const MODULES = [];
   exports: [MODULES, COMPONENTS]
 })
 ```
-* Delete the previous @NgModule
+* Delete the previous @NgModule in both core and shared modules
+* Add core and shared modules to your app.module.ts
+```javascript
+const COMPONENTS = [AppComponent];
+const PROVIDERS = [];
+const MODULES = [
+  BrowserAnimationsModule,
+  BrowserModule,
+  LayoutModule,
+  SharedModule,
+  CoreModule,
+  AppRoutingModule
+];
+
+@NgModule({
+  imports: [MODULES],
+  declarations: [COMPONENTS],
+  providers: [PROVIDERS],
+  bootstrap: [AppComponent]
+})
+```
 
 ## Add Angular Material to your project
 ```bash
@@ -287,11 +307,9 @@ import {
   MatTooltipModule,
   MatTreeModule
 } from '@angular/material';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const MODULES = [
   CommonModule,
-  BrowserAnimationsModule,
   // Material Form Controls
   MatAutocompleteModule,
   MatCheckboxModule,
@@ -358,6 +376,14 @@ router-outlet ~ * {
   height: 100%;
   width: 100%;
 }
+```
+Edit angular.json and add theme.scss to styles
+```json
+"styles": [
+  ...,
+  "src/scss/theme.scss",
+  ...
+],
 ```
 
 ## View your project through a browser
