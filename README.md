@@ -192,17 +192,17 @@ dist/
 ## Add Font Awesome and Bootstrap
 
 ```bash
-npm install --save font-awesome
-npm install --save bootstrap
+npm install --save bootstrap jquery popper.js font-awesome
 ```
 
 Edit angular.json to include Font Awesome and Bootstrap
 ```json
-"styles": [
-  "node_modules/font-awesome/css/font-awesome.min.css",
-  "node_modules/bootstrap/dist/css/bootstrap.min.css",
-  ...
-],
+"styles": ["src/styles.scss", "node_modules/bootstrap/dist/css/bootstrap.min.css"],
+"scripts": [
+  "node_modules/jquery/dist/jquery.slim.min.js",
+  "node_modules/popper.js/dist/umd/popper.min.js",
+  "node_modules/bootstrap/dist/js/bootstrap.min.js"
+]
 ```
 
 ## Configure project
@@ -234,7 +234,6 @@ const MODULES = [];
   imports: [MODULES],
   declarations: [COMPONENTS],
   providers: [PROVIDERS],
-  // Only shared.module.ts needs the exports section
   exports: [MODULES, COMPONENTS]
 })
 ```
@@ -260,132 +259,6 @@ const MODULES = [
 })
 ```
 
-## Add Angular Material to your project
-```bash
-npm install --save @angular/material @angular/cdk @angular/animations hammerjs
-```
-Edit main.ts and add hammerjs import
-```javascript
-import 'hammerjs';
-```
-Modify shared.module.ts
-```javascript
-import {
-  MatAutocompleteModule,
-  MatBadgeModule,
-  MatBottomSheetModule,
-  MatButtonModule,
-  MatButtonToggleModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatChipsModule,
-  MatDatepickerModule,
-  MatDialogModule,
-  MatDividerModule,
-  MatExpansionModule,
-  MatFormFieldModule,
-  MatGridListModule,
-  MatIconModule,
-  MatInputModule,
-  MatListModule,
-  MatMenuModule,
-  MatPaginatorModule,
-  MatProgressBarModule,
-  MatProgressSpinnerModule,
-  MatRadioModule,
-  MatRippleModule,
-  MatSelectModule,
-  MatSidenavModule,
-  MatSliderModule,
-  MatSlideToggleModule,
-  MatSnackBarModule,
-  MatSortModule,
-  MatStepperModule,
-  MatTableModule,
-  MatTabsModule,
-  MatToolbarModule,
-  MatTooltipModule,
-  MatTreeModule
-} from '@angular/material';
-
-const MODULES = [
-  CommonModule,
-  // Material Form Controls
-  MatAutocompleteModule,
-  MatCheckboxModule,
-  MatDatepickerModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatRadioModule,
-  MatSelectModule,
-  MatSliderModule,
-  MatSlideToggleModule,
-  // Material Navigation
-  MatMenuModule,
-  MatSidenavModule,
-  MatToolbarModule,
-  // Material Layout
-  MatCardModule,
-  MatDividerModule,
-  MatExpansionModule,
-  MatGridListModule,
-  MatListModule,
-  MatStepperModule,
-  MatTabsModule,
-  MatTreeModule,
-  // Material Buttons & Indicators
-  MatButtonModule,
-  MatButtonToggleModule,
-  MatBadgeModule,
-  MatChipsModule,
-  MatIconModule,
-  MatProgressSpinnerModule,
-  MatProgressBarModule,
-  MatRippleModule,
-  // Material Popups & Modals
-  MatBottomSheetModule,
-  MatDialogModule,
-  MatSnackBarModule,
-  MatTooltipModule,
-  // Material Data Table
-  MatPaginatorModule,
-  MatSortModule,
-  MatTableModule
-];
-```
-Add theme.scss under /scss directory. This will use the light indigo pink theme.
-```scss
-@import '~@angular/material/theming';
-@include mat-core();
-// Create Theme
-$app-primary: mat-palette($mat-indigo);
-$app-accent:  mat-palette($mat-pink, A200, A100, A400);
-$app-warn: mat-palette($mat-red);
-$app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
-@include angular-material-theme($app-theme);
-```
-Edit styles.scss under /scss directory
-```scss
-@import './theme.scss';
-body {
-  margin: 0;
-  padding: 0;
-}
-router-outlet ~ * {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  padding: 10px;
-}
-```
-Edit angular.json and add theme.scss to styles
-```json
-"styles": [
-  ...,
-  "src/scss/theme.scss",
-  ...
-],
-```
 
 ## View your project through a browser
 ```bash
