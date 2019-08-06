@@ -197,7 +197,11 @@ npm install --save bootstrap jquery popper.js font-awesome
 
 Edit angular.json to include Font Awesome and Bootstrap
 ```json
-"styles": ["src/styles.scss", "node_modules/bootstrap/dist/css/bootstrap.min.css"],
+"styles": [
+  "src/styles.scss",
+  "node_modules/font-awesome/css/font-awesome.min.css",
+  "node_modules/bootstrap/dist/css/bootstrap.min.css"
+],
 "scripts": [
   "node_modules/jquery/dist/jquery.slim.min.js",
   "node_modules/popper.js/dist/umd/popper.min.js",
@@ -206,9 +210,6 @@ Edit angular.json to include Font Awesome and Bootstrap
 ```
 
 ## Configure project
-Architecture of the project is important. Please see the [Architecture diagram](Angular_architecture.png) for how to set up your folder structure
-* Create the folder structure per the above diagram
-* Move the styles.scss file into this new directory and then update angular.json references from src/styles.scss to src/scss/styles.scss
 * Edit tsconfig.json to support smart paths, between target and typeRoots, add:
 ```json
 "paths": {
@@ -217,12 +218,111 @@ Architecture of the project is important. Please see the [Architecture diagram](
   "@environments/*": ["src/environments/*"]
 },
 ```
+* Create the folder structure per the below diagram
+```
+|-- app
+    |-- modules
+        |-- feature (different name for each feature in the application)
+            |-- pages
+                |-- page (different name for each page in each feature)
+                  |-- page.component.ts|html|scss|spec.ts
+            |-- feature.module.ts
+            |-- feature-routing.module.ts (only if lazy loading)
+    
+    |-- core
+        |-- animations
+            |-- *.animations.ts
+        |-- footer
+            |-- footer.component.ts|html|scss|spec.ts
+        |-- guards
+            |-- *.guard.ts
+        |-- header
+            |-- header.component.ts|html|scss|spec.ts
+        |-- interceptors
+            |-- *.interceptor.ts
+        |-- mocks
+            |-- *.mock.ts
+        |-- services
+            |-- *.service.ts|spec.ts
+        |-- core.module.ts
+    |-- shared
+        |-- components
+            |-- component (different name for each component)
+                |-- component.component.ts|html|scss|spec.ts
+        |-- directives
+            |-- *.directive.ts
+        |-- pipes
+            |-- *.pipe.ts
+        |-- models
+            |-- *.model.ts
+|-- assets
+    |-- images
+    |-- scss
+        |-- *.scss
+```
 * Create the folder modules for your project
 ```bash
-ng g m shared
 ng g m core
+ng g m shared
 ```
-* Directly under the imports of these new modules add: 
+* Edit core.module.ts
+``` typescript
+import { CommonModule } from '@angular/common';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { environment } from '@environments/environment';
+
+@NgModule({
+  // modules
+  imports: [CommonModule, HttpClientModule],
+  // header, footer
+  declarations: [],
+  // guards, interceptors, services
+  providers: [],
+  // modules, header, footer
+  exports: [CommonModule]
+  // ?animations, mocks
+})
+export class CoreModule {
+    constructor(
+    @Optional()
+    @SkipSelf()
+    parentModule: CoreModule
+  ) {
+    if (parentModule) {
+      throw new Error('CoreModule is already loaded. Import only in AppModule');
+    }
+  }
+}
+```
+
+* Edit shared.module.ts
+``` typescript
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+
+@NgModule({
+  // modules
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    RouterModule,
+  ],
+  // components, directives, pipes
+  declarations: [],
+  // modules & components, directives, pipes
+  exports: [
+    CommonModule,
+    ReactiveFormsModule,
+    RouterModule
+  ]
+})
+export class SharedModule {}
+```
+
+
   * Edit app.module.ts to support this new structure
   * Any feature page you create should have a features module with this structure. Always include the shared module in the MODULES section. Use `ng g m features/nameoffeature` to create feature
 ```javascript
