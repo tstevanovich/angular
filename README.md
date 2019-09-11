@@ -43,7 +43,7 @@ VSC comes with many extensions to make editing code easier. Below is a list of e
 
 ## VS Code Settings (settings.json)
 
-You can find this file in VS Code, by going to `File>Preferences>Settings`. In the upper right corder you'll see an icon that looks like `{ }` for Open Settings and it'll open your settings.json file. My settings.json looks like:
+You can find this file in VS Code, by going to `File>Preferences>Settings`. In the upper right corder you'll see an icon that says `Open Settings` and it'll open your settings.json file. My settings.json looks like:
 
 ```json
 {
