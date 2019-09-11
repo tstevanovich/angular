@@ -240,8 +240,6 @@ Edit angular.json to include Font Awesome and Bootstrap
             |-- header.component.ts|html|scss|spec.ts
         |-- interceptors
             |-- *.interceptor.ts
-        |-- mocks
-            |-- *.mock.ts
         |-- services
             |-- *.service.ts|spec.ts
         |-- core.module.ts
@@ -268,27 +266,22 @@ ng g m shared
 * Edit core.module.ts
 ``` typescript
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { environment } from '@environments/environment';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   // modules
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule, HttpClientModule, RouterModule],
   // header, footer
   declarations: [],
   // guards, interceptors, services
   providers: [],
-  // modules, header, footer
-  exports: [CommonModule]
-  // ?animations, mocks
+  // header, footer
+  exports: []
 })
 export class CoreModule {
-    constructor(
-    @Optional()
-    @SkipSelf()
-    parentModule: CoreModule
-  ) {
+  constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
     if (parentModule) {
       throw new Error('CoreModule is already loaded. Import only in AppModule');
     }
@@ -301,64 +294,84 @@ export class CoreModule {
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 
 @NgModule({
   // modules
   imports: [
     CommonModule,
-    ReactiveFormsModule,
-    RouterModule,
+    ReactiveFormsModule
   ],
   // components, directives, pipes
   declarations: [],
   // modules & components, directives, pipes
   exports: [
     CommonModule,
-    ReactiveFormsModule,
-    RouterModule
+    ReactiveFormsModule
   ]
 })
 export class SharedModule {}
 ```
 
-
-  * Edit app.module.ts to support this new structure
-  * Any feature page you create should have a features module with this structure. Always include the shared module in the MODULES section. Use `ng g m features/nameoffeature` to create feature
-```javascript
-const COMPONENTS = [];
-const PROVIDERS = [];
-const MODULES = [];
-
-@NgModule({
-  imports: [MODULES],
-  declarations: [COMPONENTS],
-  providers: [PROVIDERS],
-  exports: [MODULES, COMPONENTS]
-})
-```
-* Delete the previous @NgModule in both core and shared modules
-* Add core and shared modules to your app.module.ts
-```javascript
-const COMPONENTS = [AppComponent];
-const PROVIDERS = [];
-const MODULES = [
-  BrowserAnimationsModule,
-  BrowserModule,
-  LayoutModule,
-  SharedModule,
-  CoreModule,
-  AppRoutingModule
-];
+* Edit app.module.ts to support this new structure
+```typescript
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CoreModule } from '@app/core/core.module';
+import { SharedModule } from '@app/shared/shared.module';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 
 @NgModule({
-  imports: [MODULES],
-  declarations: [COMPONENTS],
-  providers: [PROVIDERS],
+  declarations: [AppComponent],
+  imports: [
+    // angular
+    BrowserModule,
+    BrowserAnimationsModule,
+
+    // all feature modules not lazy loaded
+
+    // core & shared
+    CoreModule,
+    SharedModule,
+
+    // app
+    AppRoutingModule
+  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
+export class AppModule {}
 ```
 
+* Any feature you create within the application should be set up to be lazy loaded. The example below will be for creating an `ABOUT` feature with a default home page for this new section. Just replace the word `about` for the name of your feature.
+```bash
+ng g m modules/about --routing
+ng g c modules/about/pages/home --module='modules\about\about.module.ts'
+````
+
+* Modify the app-routing.module.ts to lazy load in the new feature
+```typescript
+const routes: Routes = [
+...
+{ path: 'about', loadChildren: () => import('./modules/about/about.module').then(m => m.AboutModule) },
+...
+];
+```
+
+* Modify the new feature module `about.module.ts` to add in the Shared Module, make sure the import statement is at the top of the file
+```typescript
+  imports: [
+    CommonModule,
+    AboutRoutingModule,
+    SharedModule
+  ]
+```
+
+* Modify the new feature routing module `about-routing.module.ts` to add in the home page of the `about` section
+```typescript
+const routes: Routes = [{ path: '', component: HomeComponent }];
+```
 
 ## View your project through a browser
 ```bash
