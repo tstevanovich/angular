@@ -35,15 +35,17 @@ VSC comes with many extensions to make editing code easier. Below is a list of e
   - [TSLint](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin)
   - [Winter is Coming Theme](https://marketplace.visualstudio.com/items?itemName=johnpapa.winteriscoming)
 - [Auto Import](https://marketplace.visualstudio.com/items?itemName=steoates.autoimport)
+- [Bootstrap 4, Font awesome 4, Font Awesome 5 Free & Pro snippets](https://marketplace.visualstudio.com/items?itemName=thekalinga.bootstrap4-vscode)
 - [Bracket Pair Colorizer](https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer)
 - [Git History](https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory)
+- [JSON to Reactive Form](https://marketplace.visualstudio.com/items?itemName=jawahargopal.json-2-reactive-form)
 - [Sass](https://marketplace.visualstudio.com/items?itemName=robinbentley.sass-indented)
 - [SCSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=mrmlnc.vscode-scss)
 - [SVN](https://marketplace.visualstudio.com/items?itemName=johnstoncode.svn-scm)
 
 ## VS Code Settings (settings.json)
 
-You can find this file in VS Code, by going to `File>Preferences>Settings`. In the upper right corder you'll see an icon that says `Open Settings` and it'll open your settings.json file. My settings.json looks like:
+You can find this file in VS Code, by going to `File>Preferences>Settings`. In the upper right corder you'll see an icon that says `Open Settings (JSON)` and it'll open your settings.json file. My settings.json looks like:
 
 ```json
 {
