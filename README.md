@@ -22,26 +22,27 @@ VSC comes with many extensions to make editing code easier. Below is a list of e
 **Install**
 
 - [Angular Essentials](https://marketplace.visualstudio.com/items?itemName=johnpapa.angular-essentials) - This automatically adds following extensions:
-  - [Angular Console](https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console)
   - [Angular Language Service](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template)
   - [Angular Snippets](https://marketplace.visualstudio.com/items?itemName=johnpapa.Angular2)
-  - [angular2-inline](https://marketplace.visualstudio.com/items?itemName=natewallace.angular2-inline)
   - [Debugger for Chrome](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome)
+  - [Debugger for Microsoft Edge](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-edge)
   - [EditorConfig for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
+  - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
   - [Material Icon Theme](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme)
   - [npm](https://marketplace.visualstudio.com/items?itemName=eg2.vscode-npm-script)
+  - [Nx Console](https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console)
   - [Peacock](https://marketplace.visualstudio.com/items?itemName=johnpapa.vscode-peacock)
   - [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
-  - [TSLint](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin)
   - [Winter is Coming Theme](https://marketplace.visualstudio.com/items?itemName=johnpapa.winteriscoming)
-- [Auto Import](https://marketplace.visualstudio.com/items?itemName=steoates.autoimport)
+- [Git Extension Pack](https://marketplace.visualstudio.com/items?itemName=donjayamanne.git-extension-pack) - This automatically adds following extensions:
+  - [Git History](https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory)
+  - [gitignore](https://marketplace.visualstudio.com/items?itemName=codezombiech.gitignore)
+  - [GitLens - Git supercharged](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
+  - [Open in GitHub, Bitbucket, Gitlab, VisualStudio.com](https://marketplace.visualstudio.com/items?itemName=ziyasal.vscode-open-in-github)
+  - [Project Manager](https://marketplace.visualstudio.com/items?itemName=alefragnani.project-manager)
 - [Bootstrap 4, Font awesome 4, Font Awesome 5 Free & Pro snippets](https://marketplace.visualstudio.com/items?itemName=thekalinga.bootstrap4-vscode)
-- [Bracket Pair Colorizer](https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer)
-- [Git History](https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory)
 - [JSON to Reactive Form](https://marketplace.visualstudio.com/items?itemName=jawahargopal.json-2-reactive-form)
-- [Sass](https://marketplace.visualstudio.com/items?itemName=robinbentley.sass-indented)
-- [SCSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=mrmlnc.vscode-scss)
-- [SVN](https://marketplace.visualstudio.com/items?itemName=johnstoncode.svn-scm)
+- [stylelint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint)
 
 ## VS Code Settings (settings.json)
 
@@ -50,84 +51,68 @@ You can find this file in VS Code, by going to `File>Preferences>Settings`. In t
 ```json
 {
   "git.autofetch": true,
-  // Editor Settings
-  "editor.codeActionsOnSave": {
-    "source.organizeImports": true
-  },
-  "editor.tabSize": 2,
-  // Prettier Settings
-  "prettier.singleQuote": true,
-  "prettier.printWidth": 100,
+  // Terminal Settings
+  "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.colorTheme": "Winter is Coming (Dark Blue)",
   // Peacock Settings
-  "peacock.affectActivityBar": true,
-  "peacock.affectStatusBar": true,
-  "peacock.affectTitleBar": false,
-  "peacock.keepBadgeColor": false,
-  "peacock.keepForegroundColor": false,
   "peacock.favoriteColors": [
     {
       "name": "Angular Red",
       "value": "#b52e31"
     },
     {
-      "name": "Auth0 Orange",
-      "value": "#eb5424"
-    },
-    {
-      "name": "Azure Blue",
-      "value": "#007fff"
-    },
-    {
-      "name": "Gatsby Purple",
-      "value": "#639"
-    },
-    {
-      "name": "JavaScript Yellow",
-      "value": "#f9e64f"
-    },
-    {
       "name": "Mandalorian Blue",
       "value": "#1857a4"
-    },
-    {
-      "name": "Node Green",
-      "value": "#215732"
-    },
-    {
-      "name": "React Blue",
-      "value": "#00b3e6"
-    },
-    {
-      "name": "Something Different",
-      "value": "#832561"
-    },
-    {
-      "name": "Vue Green",
-      "value": "#42b883"
     }
   ],
+  // ESLint Settings
+  "eslint.validate": [
+    "javascript",
+    "typescript"
+  ],
+  "eslint.alwaysShowStatus": true,
+  // Individual File Settings
+  "[javascript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    }
+  },
   "[typescript]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
   },
   "[html]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "vscode.html-language-features"
+    "editor.defaultFormatter": "vscode.html-language-features",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": true
+    }
   },
   "[scss]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": true
+    }
+  },
+  "[css]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": true
+    }
   },
   "[json]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
-  "typescript.updateImportsOnFileMove.enabled": "always",
-  "breadcrumbs.enabled": true,
-  "svn.enableProposedApi": "product",
-  "workbench.iconTheme": "material-icon-theme",
-  "workbench.colorTheme": "Winter is Coming (Dark Blue - No Italics)"
+  }
 }
 ```
 
@@ -159,12 +144,26 @@ This will install a new Angular project with SCSS for styling instead of the def
 ng new nameofproject --style=scss --routing
 ```
 
+## Add Dev Dependencies for Prettier, ESLint, and Stylelint
+```bash
+# Install ESLint
+npm install --save-dev eslint
+
+# Install additional plugins
+npm install --save-dev @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-plugin-prettier eslint-plugin-simple-import-sort
+
+# Install Prettier and Prettier-ESLint dependencies
+npm install --save-dev prettier prettier-eslint eslint-config-prettier eslint-plugin-prettier
+
+# Install Stylelint and Stylelint dependencies
+npm install --save-dev stylelint stylelint-config-prettier stylelint-config-standard
+```
+
 ## Add prettier setting files
 
 Navigate into your new project directory
 
 ```bash
-cd nameofproject
 touch .prettierrc
 touch .prettierignore
 ```
@@ -173,22 +172,112 @@ touch .prettierignore
 
 ```json
 {
-  "useTabs": false,
-  "printWidth": 80,
-  "tabWidth": 2,
   "singleQuote": true,
+  "jsxBracketSameLine": true,
   "trailingComma": "none",
-  "semi": true,
-  "arrowParens": "always"
+  "endOfLine": "auto"
 }
 ```
 
 ### Prettier ignore file (.prettierignore)
 
 ```json
+dist
 package.json
 package-lock.json
-dist/
+```
+
+## Add ESLint setting files
+
+Navigate into your new project directory
+
+```bash
+touch .eslintrc
+touch .eslintignore
+```
+
+### ESLint settings (.eslintrc)
+
+```json
+{
+  "env": {
+    "browser": true,
+    "amd": true,
+    "node": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["simple-import-sort", "@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier/@typescript-eslint",
+    "plugin:prettier/recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2020, // Allows for the parsing of modern ECMAScript features
+    "sourceType": "module" // Allows for the use of imports
+  },
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/no-var-requires": 0,
+    "simple-import-sort/sort": "error"
+  }
+}
+```
+
+### ESLint ignore file (.eslintignore)
+
+```json
+!**/.eslintrc*
+node_modules*
+e2e
+dist
+*.svg
+*.ico
+*.json
+.gitignore
+*.md
+*.log
+*.lock
+```
+
+## Add Stylelint setting files
+
+Navigate into your new project directory
+
+```bash
+touch .stylelintrc
+touch .stylelintignore
+```
+
+### Styelint settings (.stylelintrc)
+
+```json
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-prettier"
+  ],
+  "rules": {
+    "selector-type-no-unknown": [true, {
+      ignoreTypes: [
+        "router-outlet"
+      ]
+    }],
+    "no-empty-source": null
+  }
+}
+```
+
+### Stylelint ignore file (.stylelintignore)
+
+```json
+**/*.js
+**/*.ts
+**/*.json
 ```
 
 ## Add Font Awesome and Bootstrap
@@ -200,9 +289,9 @@ npm install --save bootstrap jquery popper.js font-awesome
 Edit angular.json to include Font Awesome and Bootstrap
 ```json
 "styles": [
-  "src/styles.scss",
   "node_modules/font-awesome/css/font-awesome.min.css",
-  "node_modules/bootstrap/dist/css/bootstrap.min.css"
+  "node_modules/bootstrap/dist/css/bootstrap.min.css",
+  "src/assets/scss/styles.scss"
 ],
 "scripts": [
   "node_modules/jquery/dist/jquery.slim.min.js",
@@ -212,14 +301,26 @@ Edit angular.json to include Font Awesome and Bootstrap
 ```
 
 ## Configure project
-* Edit tsconfig.json to support smart paths, between target and typeRoots, add:
+* Edit tsconfig.json to support smart paths and node imports. Between target and lib, add:
 ```json
 "paths": {
   "@app/*": ["src/app/*"],
   "@assets/*": ["src/assets/*"],
   "@environments/*": ["src/environments/*"]
 },
+"typeRoots": ["node_modules/@types"],
 ```
+* Edit tsconfig.app.json, add *node* to types
+```json
+"types": ["node"]
+```
+
+* Create the folder modules for your project
+```bash
+ng g m core
+ng g m shared
+```
+
 * Create the folder structure per the below diagram
 ```
 |-- app
@@ -260,11 +361,7 @@ Edit angular.json to include Font Awesome and Bootstrap
     |-- scss
         |-- *.scss
 ```
-* Create the folder modules for your project
-```bash
-ng g m core
-ng g m shared
-```
+
 * Edit core.module.ts
 ``` typescript
 import { CommonModule } from '@angular/common';
@@ -349,16 +446,21 @@ export class AppModule {}
 * Any feature you create within the application should be set up to be lazy loaded. The example below will be for creating an `ABOUT` feature with a default home page for this new section. Just replace the word `about` for the name of your feature.
 ```bash
 ng g m modules/about --routing
-ng g c modules/about/pages/home --module='modules\about\about.module.ts'
+ng g c modules/about/pages/about-home --module='modules\about\about.module.ts'
 ````
 
 * Modify the app-routing.module.ts to lazy load in the new feature
 ```typescript
 const routes: Routes = [
-...
-{ path: 'about', loadChildren: () => import('./modules/about/about.module').then(m => m.AboutModule) },
-...
+{ path: 'about', loadChildren: () => import('./modules/about/about.module').then(m => m.AboutModule) }
 ];
+@NgModule({
+  imports: [
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+  ],
+  exports: [RouterModule]
+})
+export class AppRoutingModule {}
 ```
 
 * Modify the new feature module `about.module.ts` to add in the Shared Module, make sure the import statement is at the top of the file
@@ -372,7 +474,7 @@ const routes: Routes = [
 
 * Modify the new feature routing module `about-routing.module.ts` to add in the home page of the `about` section
 ```typescript
-const routes: Routes = [{ path: '', component: HomeComponent }];
+const routes: Routes = [{ path: '', component: AboutHomeComponent }];
 ```
 
 ## View your project through a browser
