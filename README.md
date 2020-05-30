@@ -68,6 +68,8 @@ You can find this file in VS Code, by going to `File>Preferences>Settings`. In t
     }
   ],
   // ESLint Settings
+  "eslint.enable": true,
+  "eslint.format.enable": true,
   "eslint.validate": [
     "javascript",
     "typescript"
