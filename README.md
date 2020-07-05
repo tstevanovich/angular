@@ -288,7 +288,7 @@ touch .stylelintignore
 npm install --save bootstrap jquery popper.js font-awesome
 ```
 
-Edit angular.json to include Font Awesome and Bootstrap
+Edit angular.json to include Font Awesome and Bootstrap (Note: this will need to be added in two places in this file)
 ```json
 "styles": [
   "node_modules/font-awesome/css/font-awesome.min.css",
@@ -303,7 +303,7 @@ Edit angular.json to include Font Awesome and Bootstrap
 ```
 
 ## Configure project
-* Edit tsconfig.json to support smart paths and node imports. Between target and lib, add:
+* Edit tsconfig.base.json to support smart paths and node imports. Between module and lib, add:
 ```json
 "paths": {
   "@app/*": ["src/app/*"],
