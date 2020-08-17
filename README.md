@@ -67,6 +67,8 @@ You can find this file in VS Code, by going to `File>Preferences>Settings`. In t
       "value": "#1857a4"
     }
   ],
+  // Javascript Settings
+  "javascript.implicitProjectConfig.experimentalDecorators": true,
   // ESLint Settings
   "eslint.enable": true,
   "eslint.format.enable": true,
