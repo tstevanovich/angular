@@ -54,8 +54,7 @@ You can find this file in VS Code, by going to `File>Preferences>Settings`. In t
   // Terminal Settings
   "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "workbench.iconTheme": "material-icon-theme",
-  "workbench.colorTheme": "Winter is Coming (Dark Blue)",
+  "workbench.iconTheme": "material-icon-theme"
   // Peacock Settings
   "peacock.favoriteColors": [
     {
@@ -65,6 +64,10 @@ You can find this file in VS Code, by going to `File>Preferences>Settings`. In t
     {
       "name": "Mandalorian Blue",
       "value": "#1857a4"
+    },
+    {
+      "name": "Sky Purple",
+      "value": "#a833ff"
     }
   ],
   // Javascript Settings
@@ -226,7 +229,7 @@ touch .eslintignore
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-empty-function": "off",
     "@typescript-eslint/no-var-requires": 0,
-    "simple-import-sort/sort": "error"
+    "simple-import-sort/imports": "error"
   }
 }
 ```
