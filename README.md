@@ -118,7 +118,9 @@ You can find this file in VS Code, by going to `File>Preferences>Settings`. In t
   "[json]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  // Angular Settings
+  "angular.experimental-ivy": true
 }
 ```
 
@@ -217,7 +219,7 @@ touch .eslintignore
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint",
+    "prettier",
     "plugin:prettier/recommended"
   ],
   "parserOptions": {
@@ -307,7 +309,7 @@ Edit angular.json to include Font Awesome and Bootstrap (Note: this will need to
 ```
 
 ## Configure project
-* Edit tsconfig.base.json to support smart paths and node imports. Between module and lib, add:
+* Edit tsconfig.json to support smart paths and node imports. Between module and lib, add:
 ```json
 "paths": {
   "@app/*": ["src/app/*"],
@@ -315,6 +317,12 @@ Edit angular.json to include Font Awesome and Bootstrap (Note: this will need to
   "@environments/*": ["src/environments/*"]
 },
 "typeRoots": ["node_modules/@types"],
+```
+* Also in tsconfig.json enable strictTemplates for all language features
+```json
+"angularCompilerOptions": {
+  "strictTemplates": true
+}
 ```
 * Edit tsconfig.app.json, add *node* to types
 ```json
@@ -366,6 +374,11 @@ ng g m shared
     |-- images
     |-- scss
         |-- *.scss
+```
+
+* After you move your styles.scss and app.component.scss files to /assets/scss, Edit app.component.ts
+``` typescript
+styleUrls: ['../assets/scss/app.component.scss']
 ```
 
 * Edit core.module.ts
