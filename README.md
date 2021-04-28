@@ -449,9 +449,8 @@ import { AppComponent } from './app.component';
 
     // all feature modules not lazy loaded
 
-    // core & shared
+    // core
     CoreModule,
-    SharedModule,
 
     // app
     AppRoutingModule
