@@ -50,78 +50,76 @@ You can find this file in VS Code, by going to `File>Preferences>Settings`. In t
 
 ```json
 {
-  "git.autofetch": true,
-  // Terminal Settings
-  "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
-  "typescript.updateImportsOnFileMove.enabled": "always",
-  "workbench.iconTheme": "material-icon-theme"
-  // Peacock Settings
-  "peacock.favoriteColors": [
-    {
-      "name": "Angular Red",
-      "value": "#b52e31"
+    "git.autofetch": true,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "workbench.iconTheme": "material-icon-theme",
+    // Terminal Settings
+    "terminal.integrated.defaultProfile.windows": "Git Bash",
+    // Peacock Settings
+    "peacock.favoriteColors": [
+      {
+        "name": "Angular Red",
+        "value": "#b52e31"
+      },
+      {
+        "name": "Mandalorian Blue",
+        "value": "#1857a4"
+      },
+      {
+        "name": "Sky Purple",
+        "value": "#a833ff"
+      }
+    ],
+    // Javascript Settings
+    "js/ts.implicitProjectConfig.experimentalDecorators": true,
+    // ESLint Settings
+    "eslint.format.enable": true,
+    "eslint.validate": [
+      "javascript",
+      "typescript"
+    ],
+    "eslint.alwaysShowStatus": true,
+    // Individual File Settings
+    "[javascript]": {
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+      "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+      }
     },
-    {
-      "name": "Mandalorian Blue",
-      "value": "#1857a4"
+    "[typescript]": {
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+      "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+      },
     },
-    {
-      "name": "Sky Purple",
-      "value": "#a833ff"
-    }
-  ],
-  // Javascript Settings
-  "js/ts.implicitProjectConfig.experimentalDecorators": true,
-  // ESLint Settings
-  "eslint.format.enable": true,
-  "eslint.validate": [
-    "javascript",
-    "typescript"
-  ],
-  "eslint.alwaysShowStatus": true,
-  // Individual File Settings
-  "[javascript]": {
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
-    "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true
-    }
-  },
-  "[typescript]": {
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
-    "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true
+    "[html]": {
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": "vscode.html-language-features",
+      "editor.codeActionsOnSave": {
+        "source.fixAll.stylelint": true
+      }
     },
-  },
-  "[html]": {
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "vscode.html-language-features",
-    "editor.codeActionsOnSave": {
-      "source.fixAll.stylelint": true
+    "[scss]": {
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.codeActionsOnSave": {
+        "source.fixAll.stylelint": true
+      }
+    },
+    "[css]": {
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.codeActionsOnSave": {
+        "source.fixAll.stylelint": true
+      }
+    },
+    "[json]": {
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
     }
-  },
-  "[scss]": {
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.codeActionsOnSave": {
-      "source.fixAll.stylelint": true
-    }
-  },
-  "[css]": {
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.codeActionsOnSave": {
-      "source.fixAll.stylelint": true
-    }
-  },
-  "[json]": {
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  // Angular Settings
-  "angular.experimental-ivy": true
-}
+  }
 ```
 
 ## Install Node
@@ -436,7 +434,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from '@app/core/core.module';
-import { SharedModule } from '@app/shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -460,12 +457,54 @@ import { AppComponent } from './app.component';
 })
 export class AppModule {}
 ```
+* Create a Homepage
+```bash
+ng g m modules/home
+ng g c modules/home/pages/home --module='modules\home\home.module.ts'
+```
 
-* Any feature you create within the application should be set up to be lazy loaded. The example below will be for creating an `ABOUT` feature with a default home page for this new section. Just replace the word `about` for the name of your feature.
+* Modify the app-routing.module.ts to load in the new feature
+```typescript
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+import { HomeComponent } from './modules/home/pages/home/home.component';
+
+const routes: Routes = [{ path: '', component: HomeComponent }];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule {}
+```
+
+* Modify the new feature module `home.module.ts` to add in the Shared Module, make sure the import statement is at the top of the file
+```typescript
+  imports: [
+    CommonModule,
+    SharedModule
+  ]
+```
+
+* Create Homepage Content
+```html
+<main class="flex-shrink-0">
+  <div class="container">
+    <h1 class="mt-5">Home</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  </div>
+</main>
+```
+
+* Any feature you create within the application (other than home page) should be set up to be lazy loaded. The example below will be for creating an `ABOUT` feature with a default home page for this new section. Just replace the word `about` for the name of your feature.
 ```bash
 ng g m modules/about --routing
 ng g c modules/about/pages/about-home --module='modules\about\about.module.ts'
-````
+```
 
 * Modify the app-routing.module.ts to lazy load in the new feature
 ```typescript
@@ -500,12 +539,14 @@ const routes: Routes = [{ path: '', component: AboutHomeComponent }];
 ng add @angular/material
 ```
 
-- Choose a pre-built theme. - `Deep Purple - Amber` 
-- Choose wheter to apply global typography styles. - `Yes`
-- Choose to set up browser animations. - `Yes`
+Choose a pre-built theme. - `Deep Purple - Amber` 
 
-### Add Material Module
-Create material.module.ts at /shared/material/material.module.ts
+Choose wheter to apply global typography styles. - `Yes`
+
+Choose to set up browser animations. - `Yes`
+
+
+* Create material.module.ts at /shared/material/material.module.ts
 
 ```typescript
 import { CommonModule } from '@angular/common';
@@ -638,8 +679,100 @@ import { MatTreeModule } from '@angular/material/tree';
 })
 export class MaterialModule {}
 ```
-Edit shared.module.ts. Add MaterialModule in imports and exports section.
+* Edit shared.module.ts. Add MaterialModule in imports and exports section
+```typescript
+@NgModule({
+  // modules
+  imports: [CommonModule, ReactiveFormsModule, MaterialModule],
+  // components, directives, pipes
+  declarations: [],
+  // modules & components, directives, pipes
+  exports: [CommonModule, ReactiveFormsModule, MaterialModule]
+})
+```
 
+## Optional - Create Header and Footer Component
+* Create Component
+```bash
+ng g c core/header
+ng g c core/footer
+```
+
+* Modify core.module.ts to add HeaderComponent and FooterComponent to declarations and export secttions
+```typescript
+@NgModule({
+  // modules
+  imports: [CommonModule, HttpClientModule, RouterModule],
+  // header, footer
+  declarations: [HeaderComponent, FooterComponent],
+  // guards, interceptors, services
+  providers: [],
+  // header, footer
+  exports: [HeaderComponent, FooterComponent]
+})
+```
+
+* Edit index.html and change body
+```html
+<body class="container pt-3 h-100">
+  <app-root class="d-flex flex-column h-100"></app-root>
+</body>
+```
+
+* Edit header.html
+```html
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Brand Name</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+</header>
+```
+
+* Edit footer.component.html
+```html
+<footer class="footer py-3 bg-dark">
+  <div class="container">
+    <span class="text-muted">Place sticky footer content here.</span>
+  </div>
+</footer>
+```
+
+* Edit app.component.html
+```html
+<app-header></app-header>
+<router-outlet></router-outlet>
+<app-footer class="mt-auto"></app-footer>
+```
+
+* Edit styles.css to allow room for sticky footer
+```css
+main {
+  margin-bottom: 60px;
+}
+```
 
 ## View your project through a browser
 ```bash
