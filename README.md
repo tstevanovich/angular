@@ -289,20 +289,20 @@ touch .stylelintignore
 ## Add Font Awesome and Bootstrap
 
 ```bash
-npm install --save bootstrap jquery popper.js font-awesome
+npm install --save bootstrap jquery @popperjs/core font-awesome
 ```
 
 Edit angular.json to include Font Awesome and Bootstrap (Note: this will need to be added in two places in this file)
 ```json
 "styles": [
-  "node_modules/font-awesome/css/font-awesome.min.css",
-  "node_modules/bootstrap/dist/css/bootstrap.min.css",
+  "./node_modules/font-awesome/css/font-awesome.min.css",
+  "./node_modules/bootstrap/dist/css/bootstrap.min.css",
   "src/assets/scss/styles.scss"
 ],
 "scripts": [
-  "node_modules/jquery/dist/jquery.slim.min.js",
-  "node_modules/popper.js/dist/umd/popper.min.js",
-  "node_modules/bootstrap/dist/js/bootstrap.min.js"
+  "./node_modules/jquery/dist/jquery.slim.min.js",
+  "./node_modules/@popperjs/core/dist/umd/popper.min.js",
+  "./node_modules/bootstrap/dist/js/bootstrap.min.js"
 ]
 ```
 
@@ -800,7 +800,7 @@ npm install -g angular-cli-ghpages
 Then edit package.json and add a new entry to the `scripts` section
 
 ```json
-"deploy": "ng build --prod --base-href https://<yourgithubusername>.github.io/<yourprojectname>/ && ngh --dir=dist/<yourprojectname>"
+"deploy": "ng build --configuration production --base-href https://<yourgithubusername>.github.io/<yourprojectname>/ && ngh --dir=dist/<yourprojectname>"
 ```
 
 To run the deploy
