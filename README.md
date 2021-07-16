@@ -268,11 +268,8 @@ touch .stylelintignore
     "stylelint-config-prettier"
   ],
   "rules": {
-    "selector-type-no-unknown": [true, {
-      ignoreTypes: [
-        "router-outlet"
-      ]
-    }],
+    "selector-type-no-unknown": null,
+    "selector-pseudo-element-no-unknown": null,
     "no-empty-source": null
   }
 }
